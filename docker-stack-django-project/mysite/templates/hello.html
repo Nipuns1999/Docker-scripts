@@ -1,0 +1,24 @@
+
+<title>My TODO List</title>
+<h1 style="text-align: center;">My to Do list</h1>
+
+<ul>
+    {% for name in items %}
+        <li>
+            {{ name.content }}
+            <form action="/deletetodo/{{name.id}}/" style="display: inline;" method="post"> {% csrf_token %}
+                <input type="submit" value="Delete" />
+            </form>
+
+        </li>
+    {% endfor %}
+
+</ul>
+<div>
+    <h2 style="padding-top: 5px">Add a item to do list</h2>
+    <form action="/addtodo/" method="post"> {% csrf_token %}
+        <input type="text" name="content"/>
+        <input type="submit" value="Add" />
+    </form>
+    
+</div>

@@ -1,0 +1,21 @@
+version: "3.9"
+   
+services:
+  db:
+    image: nouchka/sqlite3:latest
+    stdin_open: true
+    tty: true
+    volumes:
+         - ./sqlite3-data:/code/mysite/db.sqlite3
+
+  web:
+    image: 127.0.0.1:5000/todosite
+    build: .
+    command: python manage.py runserver 0.0.0.0:4000
+    volumes:
+      - .:/code
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+
